@@ -1,4 +1,3 @@
-import 'promise-polyfill/src/polyfill';
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 

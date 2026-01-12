@@ -1,7 +1,12 @@
 .home{
-    background-color: #f4f0f0d8;
+    
     padding: 100px 0;
     text-align: center;
+     background: #4C1D95;
+  border-radius: 5px;
+  box-shadow: 
+    8px 8px 16px #d1d9e6,
+   -8px -8px 16px #ffffff;
 
     .home-content{
         max-width: 800px;

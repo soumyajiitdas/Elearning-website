@@ -9,7 +9,11 @@ const AdminDashboard = ({user}) => {
     const navigate=useNavigate()
     if(user && user.role !=="admin") return navigate("/");
 
-    const [stats ,setStats]=useState([])  
+   const [stats, setStats] = useState({
+     totalcourses: 0,
+     totallectures: 0,
+     totalusers: 0,
+   }); 
     async function fetchstats(){
         try {
             const {data}=await axios.get(`${server}/api/stats`,{
@@ -33,15 +37,15 @@ const AdminDashboard = ({user}) => {
         <div className="main-content">
           <div className="box">
             <p>Total Courses</p>
-            <p>{stats.totalCourses}</p>
+            <p>{stats.totalcourses}</p>
           </div>
           <div className="box">
             <p>Total Lectures</p>
-            <p>{stats.totalLectures}</p>
+            <p>{stats.totallectures}</p>
           </div>
           <div className="box">
             <p>Total Users</p>
-            <p>{stats.totalUsers}</p>
+            <p>{stats.totalusers}</p>
           </div>
         </div>
       </Layout>

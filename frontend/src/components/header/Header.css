@@ -10,7 +10,7 @@ header{
     .logo{
         font-size: 25px;
         font-weight: 600;
-        color: rgb(136, 22, 138);
+        color: #4C1D95;
 
         @media(max-width: 768px){
             font-size: 18px;

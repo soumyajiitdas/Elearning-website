@@ -51,23 +51,25 @@ export const addLectures=TryCatch(async(req,res)=>{
     })
 
 })
-export const deleteLecture=TryCatch(async(req,res)=>{
-    const lecture=await Lecture.findById(req.params.id)
+export const deleteLecture = TryCatch(async (req, res) => {
+  const lecture = await Lecture.findById(req.params.id);
 
-    rm(lecture.video,()=>{
-        console.log("video deleted")
-    })
-    await lecture.deleteOne()
-    res.json({
-        message:"lecture deleted"
-    })
-})
+  rm(lecture.video, () => {
+    console.log("video deleted");
+  });
+  await lecture.deleteOne();
+  res.json({
+    message: "lecture deleted",
+  });
+});
+
+
 const unlinkasync=promisify(fs.unlink)
 export const deleteCourse=TryCatch(async(req,res)=>{
     const course=await Courses.findById(req.params.id)
     const lectures=await Lecture.find({course:course._id})
 
-    await promise.all(
+    await Promise.all(
         lectures.map(async(lecture)=>{
             await unlinkasync(lecture.video)
             console.log("video deleted")
@@ -86,20 +88,21 @@ export const deleteCourse=TryCatch(async(req,res)=>{
         message:"course deleted"
     })
 })
-export const getallstats=TryCatch(async(req,res)=>{
-    const totalcourses=(await Courses.find()).length
-    const totallectures=(await Lecture.find()).length
-    const totalusers=(await User.find()).length
+export const getallstats = TryCatch(async (req, res) => {
+  const totalcourses = (await Courses.find()).length;
+  const totallectures = (await Lecture.find()).length;
+  const totalusers = (await User.find()).length;
 
-    const stats={
-        totalcourses,
-        totallectures,
-        totalusers
-    }
-    res.json({
-        stats
-    })
-})
+  const stats = {
+    totalcourses,
+    totallectures,
+    totalusers,
+  };
+  res.json({
+    stats,
+  });
+});
+
 
 export const getallusers=TryCatch(async(req,res)=>{
     const users=await User.find({_id:{$ne:req.user._id}}).select("-password")
